@@ -1,37 +1,29 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Picker,
-  Image,
-  Dimensions,
-  Button
-} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, Button} from 'react-native';
 
-var width = Dimensions.get('window').width;
-
-class GameScreen extends React.Component {
+export default class GameScreen extends React.Component {
   constructor(props) {
     super();
-    this.state = {
-      difficulty: 'medium'
-    }
   }
   render() {
+    let rand = Math.floor(Math.random() * 4);
+    let answers = [];
+    let j = 0;
+    for (var i = 0; i < 4; i++) {
+      if (i == rand) {
+        answers.push(<Button title={this.props.trivia.correct_answer}/>);
+      } else {
+        answers.push(<Button title={this.props.trivia.incorrect_answers[j]}/>);
+        j++;
+      }
+    }
     return (
-      <View style={styles.container}>
-        <Image style={{
-          width: width * 0.6,
-          height: (width * 0.6) / 1.285
-        }} source={require('./logo.png')}/>
-        <Picker style={{
-          width: width * 0.5
-        }} selectedValue={this.state.difficulty} onValueChange={(itemValue, itemIndex) => this.setState({difficulty: itemValue})}>
-          <Picker.Item label="Easy" value="easy"/>
-          <Picker.Item label="Medium" value="medium"/>
-          <Picker.Item label="Hard" value="hard"/>
-        </Picker>
-        <Button onPress= {() => this.props.getTrivia()} title="Play" color="#841584"/>
+      <View>
+        <Text>{rand}</Text>
+        <Text>{this.props.trivia.question}</Text>
+        {answers}
+      <Text>-----</Text>
+        <Button onPress={() => this.props.nextQuestion()} title="NEXT"/>
       </View>
     );
   }
@@ -45,5 +37,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
-
-export default GameScreen;
