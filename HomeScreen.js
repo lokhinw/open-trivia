@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="Medium" value="medium"/>
           <Picker.Item label="Hard" value="hard"/>
         </Picker>
-        <Button onPress={() => this.props.getTrivia()} title="Play" color="#841584"/>
+        <Button onPress={this.props.getTrivia.bind(this)} title="Play" color="#841584"/>
       </View>
     );
   }
