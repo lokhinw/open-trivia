@@ -13,7 +13,7 @@ var width = Dimensions.get('window').width;
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       difficulty: 'medium',
       gameStarted: false

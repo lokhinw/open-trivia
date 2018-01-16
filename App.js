@@ -19,16 +19,20 @@ export default class App extends React.Component {
         gameStarted: true,
         trivia: responseJson.results
       }, function() {
-        console.log(this.state.trivia)
+        // console.log(this.state.trivia)
       });
     }).catch((error) => {
-      console.error(error);
+      // console.error(error);
     });
   }
   nextQuestion = () => {
-    this.setState({
-      questionCount: this.state.questionCount + 1
-    });
+        console.log('hello');
+    if (this.state.questionCount < 9) {
+      this.setState({
+        questionCount: this.state.questionCount + 1
+      });
+      // console.log(this.state.questionCount);
+    }
   }
   render() {
     return (
