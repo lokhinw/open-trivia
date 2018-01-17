@@ -58,19 +58,19 @@ pickernumbers.push(<Picker.Item key={i} label={(i).toString()} value={i}/>)
           height: (width * 0.6) / 1.285
         }} source={require('./logo.png')}/>
         <Picker style={{
-          width: width * 0.5
+          width: width * 0.5, color: '#FFF'
         }} selectedValue={this.state.difficulty} onValueChange={(itemValue, itemIndex) => this.setState({difficulty: itemValue})}>
           <Picker.Item label="Easy" value="easy"/>
           <Picker.Item label="Medium" value="medium"/>
           <Picker.Item label="Hard" value="hard"/>
         </Picker>
         <Picker style={{
-          width: width * 0.5
+          width: width * 0.5, color: '#FFF'
         }} selectedValue={this.state.totalQuestions} onValueChange={(itemValue, itemIndex) => this.setState({totalQuestions: itemValue})}>
         {pickernumbers}
         </Picker>
         <Picker style={{
-          width: width * 0.5}}
+          width: width * 0.5, color: '#FFF'}}
         selectedValue={this.state.category} onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
             {this.state.categories.map((category) => {
     return (
@@ -87,8 +87,8 @@ pickernumbers.push(<Picker.Item key={i} label={(i).toString()} value={i}/>)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#2C3E50',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 });

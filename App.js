@@ -21,8 +21,6 @@ export default class App extends React.Component {
         totalQuestions: totalQuestions,
         trivia: responseJson.results
       }, function() {
-        console.log(this.state.trivia)
-        console.log(this.state.totalQuestions);
       });
     }).catch((error) => {
       console.error(error);
@@ -42,9 +40,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* {this.state.questionCount >=this.state.totalQuestions ? this.state.gameStarted = false : null} */}
         {this.state.questionCount >= this.state.totalQuestions
-          ? <GameOverScreen score={this.state.score} resetGame={this.resetGame}></GameOverScreen>
+          ? <GameOverScreen score={this.state.score} totalQuestions={this.state.totalQuestions} resetGame={this.resetGame}></GameOverScreen>
           : this.state.gameStarted
             ? <GameScreen nextQuestion={this.nextQuestion} trivia={this.state.trivia[this.state.questionCount]} questionCount={this.state.questionCount}></GameScreen>
             : <HomeScreen getTrivia={this.getTrivia}></HomeScreen>}
@@ -56,7 +53,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#2C3E50',
     alignItems: 'center',
     justifyContent: 'center'
   }

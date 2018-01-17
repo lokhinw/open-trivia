@@ -37,19 +37,11 @@ export default class GameScreen extends React.Component {
     for (var i = 0; i < 4; i++) {
       if (i == this.state.rand) {
         this.state.answers.push(
-          <CustomButton key={i} onPress={this.checkAnswer.bind(this, i)} button={styles.answerButton} text={{
-            fontSize: 22,
-            fontWeight: '700',
-            color: '#000'
-          }}>{he.decode(answers.trivia.correct_answer)}</CustomButton>
+          <CustomButton key={i} onPress={this.checkAnswer.bind(this, i)} button={styles.answerButton} text={styles.answerText}>{he.decode(answers.trivia.correct_answer)}</CustomButton>
         );
       } else {
         this.state.answers.push(
-          <CustomButton key={i} onPress={this.checkAnswer.bind(this, i, j)} button={styles.answerButton} text={{
-            fontSize: 22,
-            fontWeight: '700',
-            color: '#000'
-          }}>{he.decode(answers.trivia.incorrect_answers[j])}</CustomButton>
+          <CustomButton key={i} onPress={this.checkAnswer.bind(this, i, j)} button={styles.answerButton} text={styles.answerText}>{he.decode(answers.trivia.incorrect_answers[j])}</CustomButton>
         );
         j++;
       }
@@ -62,19 +54,11 @@ export default class GameScreen extends React.Component {
     for (var i = 0; i < 4; i++) {
       if (i == this.state.rand) {
         this.state.answers.push(
-          <CustomButton key={i} button={styles.answerButton} text={{
-            fontSize: 22,
-            fontWeight: '700',
-            color: '#000'
-          }}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
+          <CustomButton key={i} button={styles.answerButton} text={styles.answerText}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
         );
       } else {
         this.state.answers.push(
-          <CustomButton key={i} button={styles.answerButton} text={{
-            fontSize: 22,
-            fontWeight: '700',
-            color: '#000'
-          }}>{he.decode(this.props.trivia.incorrect_answers[j])}</CustomButton>
+          <CustomButton key={i} button={styles.answerButton} text={styles.answerText}>{he.decode(this.props.trivia.incorrect_answers[j])}</CustomButton>
         );
         j++;
       }
@@ -84,28 +68,16 @@ export default class GameScreen extends React.Component {
         score: this.state.score + 1
       });
       this.state.answers[key] = (
-        <CustomButton key={key} button={[styles.answerButton, styles.correctAnswer]} text={{
-          fontSize: 22,
-          fontWeight: '700',
-          color: '#000'
-        }}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
+        <CustomButton key={key} button={[styles.answerButton, styles.correctAnswer]} text={styles.answerText}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
       );
 
     } else {
       this.setState(this.state);
       this.state.answers[key] = (
-        <CustomButton key={key} button={[styles.answerButton, styles.incorrectAnswer]} text={{
-          fontSize: 22,
-          fontWeight: '700',
-          color: '#000'
-        }}>{he.decode(this.props.trivia.incorrect_answers[index])}</CustomButton>
+        <CustomButton key={key} button={[styles.answerButton, styles.incorrectAnswer]} text={styles.answerText}>{he.decode(this.props.trivia.incorrect_answers[index])}</CustomButton>
       );
       this.state.answers[this.state.rand] = (
-        <CustomButton key={this.state.rand} button={[styles.answerButton, styles.correctAnswer]} text={{
-          fontSize: 22,
-          fontWeight: '700',
-          color: '#000'
-        }}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
+        <CustomButton key={this.state.rand} button={[styles.answerButton, styles.correctAnswer]} text={styles.answerText}>{he.decode(this.props.trivia.correct_answer)}</CustomButton>
       );
     }
     setTimeout(function() {
@@ -115,7 +87,10 @@ export default class GameScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 1, justifyContent: 'flex-end'}}>
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end'
+        }}>
           <ScalableText style={{
             fontSize: 18,
             textAlign: 'center',
@@ -123,7 +98,8 @@ export default class GameScreen extends React.Component {
           }}>Question {this.props.questionCount + 1}</ScalableText>
         </View>
         <View style={{
-          flex: 2, justifyContent: 'center'
+          flex: 2,
+          justifyContent: 'center'
         }}>
           <ScalableText style={{
             marginHorizontal: 20,
@@ -142,18 +118,15 @@ export default class GameScreen extends React.Component {
     );
   }
 }
-// red: #ff4646
-// green: #1ada83
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2C3E50',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: width
+    justifyContent: 'center'
   },
   answerButton: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
@@ -166,5 +139,11 @@ const styles = StyleSheet.create({
   },
   incorrectAnswer: {
     backgroundColor: '#FF4646'
+  },
+  answerText: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#000',
+    textAlign: 'center'
   }
 });
