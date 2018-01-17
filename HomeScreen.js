@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Picker,
   Image,
@@ -23,7 +22,7 @@ export default class HomeScreen extends React.Component {
       gameStarted: false
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     return fetch('https://opentdb.com/api_category.php').then((response) => response.json()).then((responseJson) => {
       this.setState({
         isLoading: false,

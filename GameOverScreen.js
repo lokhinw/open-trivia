@@ -12,7 +12,7 @@ render(){
   return(
       <View style={styles.container}>
         <ScalableText style={{fontSize: 72, color: '#FFF', textAlign: 'center'}}>YOUR SCORE IS</ScalableText>
-        <ScalableText style={{color: '#FFF'}}>{this.props.score}/{this.props.totalQuestions} ({Math.round((this.props.score / this.props.totalQuestions * 100))}%)</ScalableText>
+        <ScalableText style={{fontSize: 36, color: '#FFF'}}>{this.props.score}/{this.props.totalQuestions} ({Math.round((this.props.score / this.props.totalQuestions * 100))}%)</ScalableText>
     <Button onPress={this.props.resetGame.bind(this)} title="Restart" color="#841584"/>
       </View>
     );

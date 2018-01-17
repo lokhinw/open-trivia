@@ -2,10 +2,8 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   Dimensions,
   Button,
-  Alert
 } from 'react-native';
 import CustomButton from './CustomButton'
 import ScalableText from 'react-native-text';
