@@ -6,7 +6,8 @@ import {
   Picker,
   Image,
   Dimensions,
-  Button
+  Button,
+  ActivityIndicator
 } from 'react-native';
 
 var width = Dimensions.get('window').width;
@@ -43,9 +44,10 @@ pickernumbers.push(<Picker.Item key={i} label={(i).toString()} value={i}/>)
         return (
           <View style={{
             flex: 1,
-            paddingTop: 20
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
-            {/* <ActivityIndicator/> */}
+            <ActivityIndicator/>
           </View>
         );
       }

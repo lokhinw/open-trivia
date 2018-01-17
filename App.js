@@ -36,11 +36,15 @@ export default class App extends React.Component {
       });
     }
   }
+  resetGame = () => {
+    this.setState({gameStarted: false, questionCount: 0});
+  }
   render() {
     return (
       <View style={styles.container}>
+        {/* {this.state.questionCount >=this.state.totalQuestions ? this.state.gameStarted = false : null} */}
         {this.state.questionCount >= this.state.totalQuestions
-          ? <GameOverScreen score={this.state.score}></GameOverScreen>
+          ? <GameOverScreen score={this.state.score} resetGame={this.resetGame}></GameOverScreen>
           : this.state.gameStarted
             ? <GameScreen nextQuestion={this.nextQuestion} trivia={this.state.trivia[this.state.questionCount]} questionCount={this.state.questionCount}></GameScreen>
             : <HomeScreen getTrivia={this.getTrivia}></HomeScreen>}

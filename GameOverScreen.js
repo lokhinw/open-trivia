@@ -12,6 +12,7 @@ render(){
   return(
       <View style={styles.container}>
         <Text>{this.props.score}</Text>
+    <Button onPress={this.props.resetGame.bind(this)} title="Restart" color="#841584"/>
       </View>
     );
   }
