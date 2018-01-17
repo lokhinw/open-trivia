@@ -84,7 +84,7 @@ export default class GameScreen extends React.Component {
         score: this.state.score + 1
       });
       this.state.answers[key] = (
-        <CustomButton key={key} onPress={this.checkAnswer.bind(this, key)} button={[styles.answerButton, styles.correctAnswer]} text={{
+        <CustomButton key={key} button={[styles.answerButton, styles.correctAnswer]} text={{
           fontSize: 22,
           fontWeight: '700',
           color: '#000'
@@ -109,7 +109,7 @@ export default class GameScreen extends React.Component {
       );
     }
     setTimeout(function() {
-      that.props.nextQuestion();
+      that.props.nextQuestion(that.state.score);
     }, 1500);
   }
   render() {
@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2C3E50',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: width
   },
   answerButton: {
     backgroundColor: '#fff',

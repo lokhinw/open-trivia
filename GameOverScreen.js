@@ -9,8 +9,9 @@ export default class GameOverScreen extends React.Component {
 
   }
 render(){
+  return(
       <View style={styles.container}>
-        <View></View>
+        <Text>{this.props.score}</Text>
       </View>
     );
   }
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2C3E50',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: width
   }
 });

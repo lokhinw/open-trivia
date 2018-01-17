@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import HomeScreen from './HomeScreen';
 import GameScreen from './GameScreen';
+import GameOverScreen from './GameOverScreen';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ export default class App extends React.Component {
     this.state = {
       difficulty: 'medium',
       gameStarted: false,
-      questionCount: 0
+      questionCount: 0,
+      score: 0
     }
   }
   getTrivia = () => {
@@ -22,27 +24,24 @@ export default class App extends React.Component {
         // console.log(this.state.trivia)
       });
     }).catch((error) => {
-      // console.error(error);
+      console.error(error);
     });
   }
-  nextQuestion = () => {
-        console.log('hello');
+  nextQuestion = (score) => {
     if (this.state.questionCount < 9) {
       this.setState({
-        questionCount: this.state.questionCount + 1
+        questionCount: this.state.questionCount + 1,
+        score: score
       });
-      // console.log(this.state.questionCount);
     }
   }
   render() {
     return (
       <View style={styles.container}>
-        {this.state.gameStarted
-          ? <GameScreen nextQuestion={this.nextQuestion} trivia={this.state.trivia[this.state.questionCount]}></GameScreen>
-          : null}
-        {!this.state.gameStarted
-          ? <HomeScreen getTrivia={this.getTrivia}></HomeScreen>
-          : null}
+
+              {this.state.questionCount == 9 ? <GameOverScreen score={this.state.score}></GameOverScreen> : this.state.gameStarted
+                ? <GameScreen nextQuestion={this.nextQuestion} trivia={this.state.trivia[this.state.questionCount]}></GameScreen>
+                : <HomeScreen getTrivia={this.getTrivia}></HomeScreen>}
       </View>
     );
   }
