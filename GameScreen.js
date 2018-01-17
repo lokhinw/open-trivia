@@ -115,19 +115,25 @@ export default class GameScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{flex: 1, justifyContent: 'flex-end'}}>
+          <ScalableText style={{
+            fontSize: 18,
+            textAlign: 'center',
+            color: '#fff'
+          }}>Question {this.props.questionCount + 1}</ScalableText>
+        </View>
         <View style={{
-          flex: 1,
-          justifyContent: 'flex-end'
+          flex: 2, justifyContent: 'center'
         }}>
           <ScalableText style={{
-            margin: 20,
+            marginHorizontal: 20,
             fontSize: 24,
             textAlign: 'center',
             color: '#fff'
           }}>{he.decode(this.props.trivia.question)}</ScalableText>
         </View>
         <View style={{
-          flex: 2,
+          flex: 5,
           justifyContent: 'center'
         }}>
           {this.state.answers}
