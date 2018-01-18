@@ -9,7 +9,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-var width = Dimensions.get('window').width;
+let width = Dimensions.get('window').width;
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -22,62 +22,59 @@ export default class HomeScreen extends React.Component {
       gameStarted: false
     }
   }
+
   componentDidMount() {
     return fetch('https://opentdb.com/api_category.php').then((response) => response.json()).then((responseJson) => {
       this.setState({
         isLoading: false,
         categories: responseJson.trivia_categories
-      }, function() {
-
-      });
+      }, function() {});
     }).catch((error) => {
       console.error(error);
     });
   }
+
   render() {
     let pickernumbers = [];
-      for (var i = 1; i <= 50; i++) {
-pickernumbers.push(<Picker.Item key={i} label={(i).toString()} value={i}/>)
+    for (var i = 1; i <= 50; i++) {
+      if (i == 1) {
+        pickernumbers.push(<Picker.Item key={i} label={(i).toString() + ' Question'} value={i}/>)
+      } else {
+        pickernumbers.push(<Picker.Item key={i} label={(i).toString() + ' Questions'} value={i}/>)
       }
-      if (this.state.isLoading) {
-        return (
-          <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <ActivityIndicator/>
-          </View>
-        );
-      }
+    }
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator color="#22A7F0"/>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
-        <Image style={{
-          width: width * 0.6,
-          height: (width * 0.6) / 1.285
-        }} source={require('./logo.png')}/>
-        <Picker style={{
-          width: width * 0.5, color: '#FFF'
-        }} selectedValue={this.state.difficulty} onValueChange={(itemValue, itemIndex) => this.setState({difficulty: itemValue})}>
+        <Image style={styles.logo} source={require('./logo.png')}/>
+        <Picker style={[
+          styles.picker, {
+            marginTop: 20
+          }
+        ]} selectedValue={this.state.difficulty} onValueChange={(itemValue, itemIndex) => this.setState({difficulty: itemValue})}>
           <Picker.Item label="Easy" value="easy"/>
           <Picker.Item label="Medium" value="medium"/>
           <Picker.Item label="Hard" value="hard"/>
         </Picker>
-        <Picker style={{
-          width: width * 0.5, color: '#FFF'
-        }} selectedValue={this.state.totalQuestions} onValueChange={(itemValue, itemIndex) => this.setState({totalQuestions: itemValue})}>
-        {pickernumbers}
+        <Picker style={styles.picker} selectedValue={this.state.totalQuestions} onValueChange={(itemValue, itemIndex) => this.setState({totalQuestions: itemValue})}>
+          {pickernumbers}
         </Picker>
-        <Picker style={{
-          width: width * 0.5, color: '#FFF'}}
-        selectedValue={this.state.category} onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
-            {this.state.categories.map((category) => {
-    return (
-<Picker.Item value={category.id} label={category.name} key={category.id} />
-    );
-})}
-    </Picker>
-        <Button onPress={this.props.getTrivia.bind(this, this.state.difficulty, this.state.totalQuestions, this.state.category)} title="Play" color="#841584"/>
+        <Picker style={styles.picker} selectedValue={this.state.category} onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
+          {this.state.categories.map((category) => {
+            return (<Picker.Item value={category.id} label={category.name} key={category.id}/>);
+          })}
+        </Picker>
+        <View style={{
+          marginTop: 20,
+          width: width * 0.85
+        }}>
+          <Button onPress={this.props.getTrivia.bind(this, this.state.difficulty, this.state.totalQuestions, this.state.category)} title="Play" color="#22A7F0"/></View>
       </View>
     );
   }
@@ -88,6 +85,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2C3E50',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    width: width * 0.6,
+    height: (width * 0.6) / 1.285
+  },
+  picker: {
+    width: width * 0.85,
+    color: '#FFF'
   }
 });

@@ -3,13 +3,13 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Button,
+  Button
 } from 'react-native';
 import CustomButton from './CustomButton'
 import ScalableText from 'react-native-text';
 import he from 'he';
 
-var width = Dimensions.get('window').width;
+let width = Dimensions.get('window').width;
 
 export default class GameScreen extends React.Component {
   constructor(props) {
@@ -29,6 +29,7 @@ export default class GameScreen extends React.Component {
     this.state.rand = Math.floor(Math.random() * 4);
     this.loadAnswers(newProps);
   }
+
   loadAnswers = (answers) => {
     this.state.answers = [];
     let j = 0;
@@ -45,6 +46,7 @@ export default class GameScreen extends React.Component {
       }
     }
   }
+
   checkAnswer = (key, index) => {
     this.state.answers = [];
     let that = this;
@@ -82,6 +84,7 @@ export default class GameScreen extends React.Component {
       that.props.nextQuestion(that.state.score);
     }, 1500);
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -89,22 +92,13 @@ export default class GameScreen extends React.Component {
           flex: 1,
           justifyContent: 'flex-end'
         }}>
-          <ScalableText style={{
-            fontSize: 18,
-            textAlign: 'center',
-            color: '#fff'
-          }}>Question {this.props.questionCount + 1}</ScalableText>
+          <ScalableText style={styles.questionCount}>Question {this.props.questionCount + 1}</ScalableText>
         </View>
         <View style={{
           flex: 2,
           justifyContent: 'center'
         }}>
-          <ScalableText style={{
-            marginHorizontal: 20,
-            fontSize: 24,
-            textAlign: 'center',
-            color: '#fff'
-          }}>{he.decode(this.props.trivia.question)}</ScalableText>
+          <ScalableText style={styles.question}>{he.decode(this.props.trivia.question)}</ScalableText>
         </View>
         <View style={{
           flex: 5,
@@ -116,12 +110,24 @@ export default class GameScreen extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2C3E50',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  question: {
+    marginHorizontal: 20,
+    fontSize: 24,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  questionCount: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#fff'
   },
   answerButton: {
     backgroundColor: '#FFF',
